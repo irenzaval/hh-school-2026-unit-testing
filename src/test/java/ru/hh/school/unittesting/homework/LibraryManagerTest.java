@@ -55,7 +55,7 @@ class LibraryManagerTest {
 
         assertTrue(result);
         assertEquals(10, libraryManager.getAvailableCopies("book1"));
-        verify(notificationService).notifyUser("user1", "You have borrowed the book: " + "book1");
+        verify(notificationService).notifyUser("user1", "You have borrowed the book: book1");
     }
 
     @Test
@@ -99,7 +99,7 @@ class LibraryManagerTest {
 
         assertTrue(result);
         assertEquals(11, libraryManager.getAvailableCopies("book1"));
-        verify(notificationService).notifyUser("user1", "You have returned the book: " + "book1");
+        verify(notificationService).notifyUser("user1", "You have returned the book: book1");
     }
 
     @Test
@@ -114,6 +114,7 @@ class LibraryManagerTest {
 
     @Test
     void returnNotBorrowedBookShouldReturnFalse() {
+
         boolean result = libraryManager.returnBook("book1", "user1");
 
         assertFalse(result);
@@ -134,6 +135,7 @@ class LibraryManagerTest {
 
     @ParameterizedTest
     @CsvSource({
+            "0, false, false, 0.00",
             "1, false, false, 0.50",
             "2, true, false, 1.50",
             "5, false, true, 2.00 ",
